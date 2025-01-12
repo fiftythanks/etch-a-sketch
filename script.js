@@ -62,6 +62,7 @@ function resetGrid() {
   for(let i = 1; i <= rows; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
+    row.style.width = `${7.2 * cols}px`
     for (let j = 1; j <= cols; j++) {
       const el = document.createElement("div");
       row.appendChild(el);
