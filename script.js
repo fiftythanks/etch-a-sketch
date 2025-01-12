@@ -14,14 +14,18 @@
 
 2. Add a button on the top of the screen that will send the user a popup asking for the number of squares per side for the new grid. Once entered, the existing grid should be removed, and a new grid should be generated in the same total space as before (e.g., 960px wide) so that you’ve got a new sketch pad.
 */
+let mouseDown = 0;
+document.addEventListener("mouseup", () => mouseDown = 0);
 
 const grid = document.querySelector("#grid");
 for(let i = 1; i <= 16; i++) {
   const row = document.createElement("div");
   row.classList.add("row");
   for (let j = 1; j <= 16; j++) {
-    const el = document.createElement("div");
-    row.appendChild(el);
+    const cell = document.createElement("div");
+    row.appendChild(cell);
+    cell.addEventListener("mousedown", paint);
+    cell.addEventListener("mouseenter", continuePaint);
   }
   grid.appendChild(row);
 }
@@ -51,9 +55,56 @@ function resetGrid() {
     row.classList.add("row");
     row.style.flexBasis = `${720 / size}px`;
     for (let j = 1; j <= size; j++) {
-      const el = document.createElement("div");
-      row.appendChild(el);
+      const cell = document.createElement("div");
+      row.appendChild(cell);
+      cell.addEventListener("mousedown", paint);
+      cell.addEventListener("mouseenter", continuePaint);
     }
     grid.appendChild(row);
+  }
+}
+
+function paint(e) {
+  mouseDown = 1;
+  const cell = e.target;
+  switch (cell.style.opacity) {
+    case "0.1":
+      cell.style.opacity = "0.2";
+      break;
+    case "0.2":
+      cell.style.opacity = "0.3";
+      break;
+    case "0.3":
+      cell.style.opacity = "0.4";
+      break;
+    case "0.4":
+      cell.style.opacity = "0.5";
+      break;
+    case "0.5":
+      cell.style.opacity = "0.6";
+      break;
+    case "0.6":
+      cell.style.opacity = "0.7";
+      break;
+    case "0.7":
+      cell.style.opacity = "0.8";
+      break;
+    case "0.8":
+      cell.style.opacity = "0.9";
+      break;
+    case "0.9":
+      cell.style.opacity = "1";
+      break;
+    case "1":
+      break;
+    default:
+      cell.style.backgroundColor = `#${(Math.random() * 0xffffff * 1000000).toString(16).slice(0, 6)}`;
+      cell.style.opacity = "0.1";
+  }
+}
+
+function continuePaint(e) {
+  if (mouseDown === 1) {
+    paint(e);
   }
 }
