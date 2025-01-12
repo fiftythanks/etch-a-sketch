@@ -13,8 +13,6 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
   width: 720px;
   height: 720px;
   padding: 0;
@@ -24,10 +22,10 @@ body {
 .row {
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 7.2px; 
+  flex-basis: 45px; /* (720 / size)px */   
   margin: 0;
   padding: 0; 
-  width: 115.2px; /* (7.2 * cols)px */
+  width: 720px;
 
   display: flex;
   flex-wrap: nowrap;

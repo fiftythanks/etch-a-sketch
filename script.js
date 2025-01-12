@@ -29,41 +29,28 @@ for(let i = 1; i <= 16; i++) {
 document.querySelector("button").addEventListener("click", resetGrid);
 
 function resetGrid() {
-  let cols;
-  let rows;
-  function resetColumns() {
-    cols = parseInt(prompt("How many columns do you want the grid to have? Type in a positive integer number that is less than or equal to 100."));
+  let size;
+  function resetSize() {
+    size = parseInt(prompt("How many columns and rows do you want the grid to have? Type in a positive integer number that is less than or equal to 100."));
 
-    if (!(Number.isInteger(cols) && cols > 0 && cols <= 100)) {
+    if (!(Number.isInteger(size) && size > 0 && size <= 100)) {
       alert("The number has to be a positive integer less than or equal to 100!");
-      return resetColumns();
+      return resetSize();
     } else {
-      return cols;
+      return size;
     }
   }
-  resetColumns();
-
-  function resetRows() {
-    rows = parseInt(prompt("How many rows do you want the grid to have? Type in a positive integer number that is less than or equal to 100."));
-
-    if (!(Number.isInteger(rows) && rows > 0 && rows <= 100)) {
-      alert("The number has to be a positive integer less than or equal to 100!");
-      return resetColumns();
-    } else {
-      return rows;
-    }
-  }
-  resetRows();
+  resetSize();
 
   Array.from(grid.children).forEach((child) => {
     child.remove();
   });
 
-  for(let i = 1; i <= rows; i++) {
+  for(let i = 1; i <= size; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
-    row.style.width = `${7.2 * cols}px`
-    for (let j = 1; j <= cols; j++) {
+    row.style.flexBasis = `${720 / size}px`;
+    for (let j = 1; j <= size; j++) {
       const el = document.createElement("div");
       row.appendChild(el);
     }
